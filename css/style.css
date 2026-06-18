@@ -72,7 +72,9 @@ body {
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
-img { max-width: 100%; display: block; }
+/* height:auto keeps the natural aspect ratio when width is constrained
+   (without it, the height attribute pins and the image distorts) */
+img { max-width: 100%; height: auto; display: block; }
 a { color: var(--gold-bright); text-decoration: none; }
 ul { list-style: none; }
 
