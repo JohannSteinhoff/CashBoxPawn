@@ -258,7 +258,9 @@
 
   function showLightbox(i) {
     current = (i + items.length) % items.length;
-    lbImg.src = items[current].src;
+    // currentSrc is the file the browser actually picked (webp where supported),
+    // so the lightbox reuses the cached image instead of fetching the jpg.
+    lbImg.src = items[current].currentSrc || items[current].src;
     lbImg.alt = items[current].alt;
     lbCounter.textContent = (current + 1) + ' / ' + items.length;
     if (lightbox.hidden) { // only lock on the initial open, not on prev/next

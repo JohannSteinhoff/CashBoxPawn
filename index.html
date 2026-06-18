@@ -52,6 +52,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
+  <!-- Preload the hero (LCP) image so it starts downloading immediately -->
+  <link rel="preload" as="image" href="images/hero.webp" type="image/webp" fetchpriority="high">
+
   <!-- Apply the saved (or OS-preferred) theme before first paint to avoid a flash -->
   <script>
     (function () {
@@ -73,7 +76,10 @@
   <header class="site-header" id="siteHeader">
     <nav class="nav container" aria-label="Main navigation">
       <a class="brand" href="#top">
-        <img src="images/logo.png" alt="Cash Box Pawn logo" width="44" height="44">
+        <picture>
+          <source srcset="images/logo.webp" type="image/webp">
+          <img src="images/logo.png" alt="Cash Box Pawn logo" width="44" height="44">
+        </picture>
         <span>Cash <em>Box</em> Pawn</span>
       </a>
       <ul class="nav-menu" id="navMenu">
@@ -106,7 +112,10 @@
     <!-- ============ HERO ============ -->
     <section class="hero" id="top">
       <div class="hero-bg">
-        <img src="images/hero.jpg" alt="Cash Box Pawn storefront at 1515 Aquarena Springs Dr, San Marcos" fetchpriority="high">
+        <picture>
+          <source srcset="images/hero.webp" type="image/webp">
+          <img src="images/hero.jpg" alt="Cash Box Pawn storefront at 1515 Aquarena Springs Dr, San Marcos" fetchpriority="high" width="1600" height="1067">
+        </picture>
       </div>
       <div class="hero-content container">
         <span class="open-chip" id="openChipHero" hidden></span>
@@ -138,27 +147,27 @@
         <p class="section-lead reveal">From collectible guitars to gemstone rings to fully stocked toolboxes — browse a constantly changing inventory, all backed by our friendly, knowledgeable staff.</p>
         <div class="card-grid">
           <a href="#gallery" class="card reveal">
-            <img src="images/service-1.jpg" alt="Designer watches in a display case" loading="lazy">
+            <picture><source srcset="images/service-1.webp" type="image/webp"><img src="images/service-1.jpg" alt="Designer watches in a display case" loading="lazy" width="800" height="533"></picture>
             <div class="card-body"><h3>Jewelry &amp; Watches</h3><p>Gold, gemstone rings, designer watches &amp; more.</p></div>
           </a>
           <a href="#gallery" class="card reveal">
-            <img src="images/gallery-4.jpg" alt="Rack of shotguns and rifles" loading="lazy">
+            <picture><source srcset="images/gallery-4.webp" type="image/webp"><img src="images/gallery-4.jpg" alt="Rack of shotguns and rifles" loading="lazy" width="1100" height="733"></picture>
             <div class="card-body"><h3>Firearms</h3><p>Rifles, shotguns &amp; handguns — all transactions fully compliant with Texas law.</p></div>
           </a>
           <a href="#gallery" class="card reveal">
-            <img src="images/gallery-1.jpg" alt="Wall of power tools" loading="lazy">
+            <picture><source srcset="images/gallery-1.webp" type="image/webp"><img src="images/gallery-1.jpg" alt="Wall of power tools" loading="lazy" width="1100" height="733"></picture>
             <div class="card-body"><h3>Tools &amp; Equipment</h3><p>Power tools, hand tools &amp; outdoor equipment.</p></div>
           </a>
           <a href="#gallery" class="card reveal">
-            <img src="images/service-2.jpg" alt="MacBook laptops with price tags" loading="lazy">
+            <picture><source srcset="images/service-2.webp" type="image/webp"><img src="images/service-2.jpg" alt="MacBook laptops with price tags" loading="lazy" width="800" height="533"></picture>
             <div class="card-body"><h3>Electronics &amp; Computers</h3><p>Laptops, TVs, tablets &amp; smart devices.</p></div>
           </a>
           <a href="#gallery" class="card reveal">
-            <img src="images/storefront.jpg" alt="Row of acoustic and electric guitars" loading="lazy">
+            <picture><source srcset="images/storefront.webp" type="image/webp"><img src="images/storefront.jpg" alt="Row of acoustic and electric guitars" loading="lazy" width="800" height="533"></picture>
             <div class="card-body"><h3>Musical Instruments</h3><p>Guitars, amps, band instruments &amp; drums.</p></div>
           </a>
           <a href="#gallery" class="card reveal">
-            <img src="images/service-3.jpg" alt="DSLR cameras on a glass shelf" loading="lazy">
+            <picture><source srcset="images/service-3.webp" type="image/webp"><img src="images/service-3.jpg" alt="DSLR cameras on a glass shelf" loading="lazy" width="800" height="533"></picture>
             <div class="card-body"><h3>Cameras &amp; Gaming</h3><p>DSLRs, lenses, consoles &amp; handhelds.</p></div>
           </a>
         </div>
@@ -184,7 +193,10 @@
     <section class="section about" id="about">
       <div class="container about-grid">
         <div class="about-img reveal">
-          <img src="images/about.jpg" alt="Staff member helping a customer at the jewelry counter" loading="lazy">
+          <picture>
+            <source srcset="images/about.webp" type="image/webp">
+            <img src="images/about.jpg" alt="Staff member helping a customer at the jewelry counter" loading="lazy" width="900" height="600">
+          </picture>
         </div>
         <div class="about-copy">
           <p class="kicker reveal">About Us</p>
@@ -207,18 +219,18 @@
         <h2 class="reveal">Browse Our Inventory</h2>
         <p class="section-lead reveal">Tap any photo to view it full screen. Inventory changes daily — come see what's new.</p>
         <div class="gallery" id="gallery-grid">
-          <button class="g-item reveal"><img src="images/gallery-1.jpg" alt="Wall of power tools below a mounted deer head" loading="lazy"></button>
-          <button class="g-item reveal"><img src="images/gallery-2.jpg" alt="Apple TV 4K and calculators on a shelf" loading="lazy"></button>
-          <button class="g-item reveal"><img src="images/gallery-3.jpg" alt="Marshall amp and speakers with price tags" loading="lazy"></button>
-          <button class="g-item reveal"><img src="images/gallery-4.jpg" alt="Rack of shotguns and rifles with tags" loading="lazy"></button>
-          <button class="g-item reveal"><img src="images/gallery-5.jpg" alt="Tray of gold and diamond rings in the jewelry case" loading="lazy"></button>
-          <button class="g-item reveal"><img src="images/gallery-6.jpg" alt="Wrench sets and hand tools" loading="lazy"></button>
-          <button class="g-item reveal"><img src="images/gallery-7.jpg" alt="Nintendo 3DS handheld consoles" loading="lazy"></button>
-          <button class="g-item reveal"><img src="images/gallery-8.jpg" alt="Rack of golf clubs and drivers" loading="lazy"></button>
-          <button class="g-item reveal"><img src="images/gallery-9.jpg" alt="Flutes and clarinets in cases" loading="lazy"></button>
-          <button class="g-item reveal"><img src="images/gallery-10.jpg" alt="Vintage Coca-Cola machine and neon beer signs" loading="lazy"></button>
-          <button class="g-item reveal"><img src="images/gallery-11.jpg" alt="Ludwig Pinnacle drum kit in front of a wall of TVs" loading="lazy"></button>
-          <button class="g-item reveal"><img src="images/gallery-12.jpg" alt="Row of electric guitars" loading="lazy"></button>
+          <button class="g-item reveal"><picture><source srcset="images/gallery-1.webp" type="image/webp"><img src="images/gallery-1.jpg" alt="Wall of power tools below a mounted deer head" loading="lazy" width="1100" height="733"></picture></button>
+          <button class="g-item reveal"><picture><source srcset="images/gallery-2.webp" type="image/webp"><img src="images/gallery-2.jpg" alt="Apple TV 4K and calculators on a shelf" loading="lazy" width="1100" height="733"></picture></button>
+          <button class="g-item reveal"><picture><source srcset="images/gallery-3.webp" type="image/webp"><img src="images/gallery-3.jpg" alt="Marshall amp and speakers with price tags" loading="lazy" width="1100" height="733"></picture></button>
+          <button class="g-item reveal"><picture><source srcset="images/gallery-4.webp" type="image/webp"><img src="images/gallery-4.jpg" alt="Rack of shotguns and rifles with tags" loading="lazy" width="1100" height="733"></picture></button>
+          <button class="g-item reveal"><picture><source srcset="images/gallery-5.webp" type="image/webp"><img src="images/gallery-5.jpg" alt="Tray of gold and diamond rings in the jewelry case" loading="lazy" width="1100" height="733"></picture></button>
+          <button class="g-item reveal"><picture><source srcset="images/gallery-6.webp" type="image/webp"><img src="images/gallery-6.jpg" alt="Wrench sets and hand tools" loading="lazy" width="1100" height="733"></picture></button>
+          <button class="g-item reveal"><picture><source srcset="images/gallery-7.webp" type="image/webp"><img src="images/gallery-7.jpg" alt="Nintendo 3DS handheld consoles" loading="lazy" width="1100" height="733"></picture></button>
+          <button class="g-item reveal"><picture><source srcset="images/gallery-8.webp" type="image/webp"><img src="images/gallery-8.jpg" alt="Rack of golf clubs and drivers" loading="lazy" width="1100" height="733"></picture></button>
+          <button class="g-item reveal"><picture><source srcset="images/gallery-9.webp" type="image/webp"><img src="images/gallery-9.jpg" alt="Flutes and clarinets in cases" loading="lazy" width="1100" height="733"></picture></button>
+          <button class="g-item reveal"><picture><source srcset="images/gallery-10.webp" type="image/webp"><img src="images/gallery-10.jpg" alt="Vintage Coca-Cola machine and neon beer signs" loading="lazy" width="1100" height="733"></picture></button>
+          <button class="g-item reveal"><picture><source srcset="images/gallery-11.webp" type="image/webp"><img src="images/gallery-11.jpg" alt="Ludwig Pinnacle drum kit in front of a wall of TVs" loading="lazy" width="1100" height="733"></picture></button>
+          <button class="g-item reveal"><picture><source srcset="images/gallery-12.webp" type="image/webp"><img src="images/gallery-12.jpg" alt="Row of electric guitars" loading="lazy" width="1100" height="733"></picture></button>
         </div>
       </div>
     </section>
@@ -317,7 +329,10 @@
     <div class="container footer-grid">
       <div>
         <a class="brand" href="#top">
-          <img src="images/logo.png" alt="" width="40" height="40">
+          <picture>
+            <source srcset="images/logo.webp" type="image/webp">
+            <img src="images/logo.png" alt="" width="40" height="40">
+          </picture>
           <span>Cash <em>Box</em> Pawn</span>
         </a>
         <p>San Marcos' most trusted pawn shop — unbeatable deals and top-dollar loans for over 20 years.</p>
