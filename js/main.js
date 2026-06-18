@@ -221,6 +221,34 @@
     sections.forEach(function (s) { sio.observe(s); });
   }
 
+  /* ---------- Scroll lock ----------
+     Setting body { overflow: hidden } doesn't stop touch-scrolling the page
+     behind an overlay on mobile (notably iOS Safari). Pinning the body with
+     position:fixed does, and we restore the scroll position on release. A
+     counter keeps it locked while any overlay is open. */
+  var scrollLockCount = 0, scrollLockY = 0;
+  function lockScroll() {
+    if (scrollLockCount++ > 0) return;
+    scrollLockY = window.pageYOffset || document.documentElement.scrollTop || 0;
+    document.body.style.position = 'fixed';
+    document.body.style.top = -scrollLockY + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+  }
+  function unlockScroll() {
+    if (scrollLockCount === 0 || --scrollLockCount > 0) return;
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    var prev = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = 'auto'; // avoid smooth-scroll jump
+    window.scrollTo(0, scrollLockY);
+    document.documentElement.style.scrollBehavior = prev;
+  }
+
   /* ---------- Gallery lightbox ---------- */
   var items = Array.prototype.slice.call(document.querySelectorAll('.g-item img'));
   var lightbox = document.getElementById('lightbox');
@@ -233,12 +261,15 @@
     lbImg.src = items[current].src;
     lbImg.alt = items[current].alt;
     lbCounter.textContent = (current + 1) + ' / ' + items.length;
-    lightbox.hidden = false;
-    document.body.style.overflow = 'hidden';
+    if (lightbox.hidden) { // only lock on the initial open, not on prev/next
+      lightbox.hidden = false;
+      lockScroll();
+    }
   }
   function hideLightbox() {
+    if (lightbox.hidden) return;
     lightbox.hidden = true;
-    document.body.style.overflow = '';
+    unlockScroll();
   }
   items.forEach(function (img, i) {
     img.closest('.g-item').addEventListener('click', function () { showLightbox(i); });
@@ -290,12 +321,13 @@
       cmMap.removeAttribute('data-src');
     }
     cModal.hidden = false;
-    document.body.style.overflow = 'hidden';
+    lockScroll();
     cmClose.focus();
   }
   function closeContactModal() {
+    if (cModal.hidden) return;
     cModal.hidden = true;
-    document.body.style.overflow = '';
+    unlockScroll();
     if (cmOpener && cmOpener.focus) cmOpener.focus();
   }
 
