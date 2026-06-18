@@ -215,10 +215,12 @@ h3 { font-size: 1.15rem; }
 .hero-bg { z-index: -1; }
 .hero-content { padding-top: 5rem; max-width: 1140px; }
 .hero-content h1 { margin: .9rem 0 1.1rem; text-shadow: var(--hero-text-shadow); }
-.hero-content p { font-size: 1.12rem; color: var(--ink-dim); max-width: 520px; margin-bottom: 2rem; }
-/* On the light theme the muted grey washes out over the photo, so use the
-   solid ink colour and a soft glow to keep the intro paragraph legible. */
-:root[data-theme="light"] .hero-content p { color: var(--ink); text-shadow: var(--hero-text-shadow); }
+/* The intro paragraph sits on the photo, so use the full-brightness ink and a
+   soft glow (rather than the muted body grey) to keep it easy to read. */
+.hero-content p {
+  font-size: 1.12rem; color: var(--ink); max-width: 520px; margin-bottom: 2rem;
+  text-shadow: var(--hero-text-shadow);
+}
 .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 /* The outline button sits directly on the hero photo, where a fully
    transparent fill is hard to read. Give it a frosted backdrop and a solid
