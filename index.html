@@ -49,11 +49,21 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Load fonts without blocking first paint; they swap in when ready
+       (Inter/Bitter fall back to system fonts until then) -->
+  <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap">
+  </noscript>
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Preload the hero (LCP) image so it starts downloading immediately -->
-  <link rel="preload" as="image" href="images/hero.webp" type="image/webp" fetchpriority="high">
+  <!-- Preload the hero (LCP) image so it starts downloading immediately;
+       the responsive set lets phones grab a much smaller file -->
+  <link rel="preload" as="image" href="images/hero-1200.webp"
+        imagesrcset="images/hero-768.webp 768w, images/hero-1200.webp 1200w, images/hero-1600.webp 1600w"
+        imagesizes="100vw" fetchpriority="high">
 
   <!-- Apply the saved (or OS-preferred) theme before first paint to avoid a flash -->
   <script>
@@ -113,7 +123,8 @@
     <section class="hero" id="top">
       <div class="hero-bg">
         <picture>
-          <source srcset="images/hero.webp" type="image/webp">
+          <source type="image/webp" sizes="100vw"
+                  srcset="images/hero-768.webp 768w, images/hero-1200.webp 1200w, images/hero-1600.webp 1600w">
           <img src="images/hero.jpg" alt="Cash Box Pawn storefront at 1515 Aquarena Springs Dr, San Marcos" fetchpriority="high" width="1600" height="1067">
         </picture>
       </div>

@@ -56,10 +56,27 @@ def process_logo():
     print(f"{'logo.png':18} {before//1024:4d}KB -> png {os.path.getsize(path)//1024:4d}KB "
           f"({im.width}x{im.height})")
 
+def process_hero():
+    # The hero is the LCP image: keep a jpg fallback plus a responsive set of
+    # WebPs so phones download a small file instead of the full-width one.
+    src = Image.open(os.path.join(IMG, "hero.jpg"))
+    src = ImageOps.exif_transpose(src).convert("RGB")
+    if src.width > 1600:
+        src = src.resize((1600, round(src.height * 1600 / src.width)), Image.LANCZOS)
+    src.save(os.path.join(IMG, "hero.jpg"), "JPEG", quality=80, optimize=True, progressive=True)
+    for w in (768, 1200, 1600):
+        im = src.resize((w, round(src.height * w / src.width)), Image.LANCZOS) if w < src.width else src
+        out = os.path.join(IMG, f"hero-{w}.webp")
+        im.save(out, "WEBP", quality=68, method=6)
+        print(f"hero-{w}.webp        {os.path.getsize(out)//1024:4d}KB  ({im.width}x{im.height})")
+
 def main():
     for name in sorted(os.listdir(IMG)):
+        if name == "hero.jpg":
+            continue  # handled separately (responsive set)
         if name.lower().endswith(".jpg"):
             process_jpg(name)
+    process_hero()
     process_logo()
 
 if __name__ == "__main__":

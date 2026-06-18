@@ -134,13 +134,20 @@
   /* ---------- Sticky header ---------- */
   var header = document.getElementById('siteHeader');
   var toTop = document.getElementById('toTop');
-  function onScroll() {
+  var scrollTicking = false;
+  function applyScroll() {
+    scrollTicking = false;
     var y = window.scrollY;
     header.classList.toggle('scrolled', y > 30);
     toTop.hidden = y < 600;
   }
+  function onScroll() { // batch the read into a frame to avoid forced reflow
+    if (scrollTicking) return;
+    scrollTicking = true;
+    window.requestAnimationFrame(applyScroll);
+  }
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  applyScroll();
   toTop.addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
