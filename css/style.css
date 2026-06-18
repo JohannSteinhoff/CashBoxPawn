@@ -46,8 +46,8 @@
   --header-bg: rgba(247, 244, 237, .9);
   --footer-bg: #ece6d9;
   --overlay: rgba(0, 0, 0, .06);
-  --hero-scrim: linear-gradient(100deg, rgba(247,244,237,.78) 16%, rgba(247,244,237,.4) 52%, rgba(247,244,237,.08));
-  --hero-text-shadow: 0 1px 2px rgba(247,244,237,.95), 0 2px 22px rgba(247,244,237,.7);
+  --hero-scrim: linear-gradient(100deg, rgba(247,244,237,.92) 22%, rgba(247,244,237,.7) 55%, rgba(247,244,237,.32));
+  --hero-text-shadow: 0 1px 2px rgba(247,244,237,.98), 0 2px 22px rgba(247,244,237,.85);
   /* On light backgrounds the gold darkens, so white reads better on it */
   --btn-ink: #ffffff;
   --shadow: 0 10px 30px rgba(40, 30, 0, .12);
@@ -128,11 +128,20 @@ h3 { font-size: 1.15rem; }
 .site-header {
   position: fixed; inset: 0 0 auto 0; z-index: 100;
   padding: .9rem 0;
-  transition: background .3s, padding .3s, box-shadow .3s;
+  transition: padding .3s, box-shadow .3s;
 }
-.site-header.scrolled {
+/* The blurred background lives on a pseudo-element rather than the header
+   itself. Putting backdrop-filter on the header would make it the containing
+   block for its position:fixed children, collapsing the mobile slide-in menu
+   to the header's height once the page is scrolled. */
+.site-header::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
   background: var(--header-bg);
   backdrop-filter: blur(12px);
+  opacity: 0; transition: opacity .3s;
+}
+.site-header.scrolled::before { opacity: 1; }
+.site-header.scrolled {
   padding: .5rem 0;
   box-shadow: 0 4px 24px rgba(0,0,0,.45);
 }
@@ -207,7 +216,22 @@ h3 { font-size: 1.15rem; }
 .hero-content { padding-top: 5rem; max-width: 1140px; }
 .hero-content h1 { margin: .9rem 0 1.1rem; text-shadow: var(--hero-text-shadow); }
 .hero-content p { font-size: 1.12rem; color: var(--ink-dim); max-width: 520px; margin-bottom: 2rem; }
+/* On the light theme the muted grey washes out over the photo, so use the
+   solid ink colour and a soft glow to keep the intro paragraph legible. */
+:root[data-theme="light"] .hero-content p { color: var(--ink); text-shadow: var(--hero-text-shadow); }
 .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+/* The outline button sits directly on the hero photo, where a fully
+   transparent fill is hard to read. Give it a frosted backdrop and a solid
+   border so the label stands out in both themes. */
+.hero-actions .btn-outline {
+  background: color-mix(in srgb, var(--bg) 62%, transparent);
+  backdrop-filter: blur(6px);
+  border-color: color-mix(in srgb, var(--ink) 65%, transparent);
+}
+.hero-actions .btn-outline:hover {
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  border-color: var(--gold-bright); color: var(--gold-bright);
+}
 
 .open-chip {
   display: inline-flex; align-items: center; gap: .5rem;
