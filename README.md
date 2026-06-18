@@ -21,8 +21,11 @@ then visit http://localhost:8000.
 ## Structure
 
 ```
-index.html      — the page (all sections)
-css/style.css   — styles, layout, animations
-js/main.js      — hours/open-status, gallery lightbox, nav, form, animations
-images/         — photos and logo
+index.html          — the page (all sections) + inlined CSS in a <style> block
+js/main.js          — hours/open-status, gallery lightbox, nav, form, animations
+images/             — photos and logo (WebP with JPEG fallbacks)
+optimize_images.py  — one-off image resizer/compressor
 ```
+
+The CSS lives in a `<style>` block in the `<head>` of `index.html` (inlined to
+avoid a render-blocking request). Edit it there.
