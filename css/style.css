@@ -241,18 +241,17 @@ h3 { font-size: 1.15rem; }
   display: inline-flex; align-items: center; gap: .5rem;
   padding: .35rem .95rem; border-radius: 999px;
   font-size: .82rem; font-weight: 600;
-  background: rgba(5,146,62,.16); color: var(--green-bright);
-  border: 1px solid rgba(24,183,92,.45);
+  /* Solid pills with white text so contrast holds over the hero photo in
+     both themes (a translucent tint can't guarantee a 4.5:1 ratio) */
+  background: #0a7a37; color: #fff;
+  border: 1px solid rgba(255,255,255,.3);
 }
 .open-chip::before {
   content: ""; width: 8px; height: 8px; border-radius: 50%;
   background: currentColor;
   animation: pulse 2s infinite;
 }
-.open-chip.closed { background: rgba(190,60,60,.14); color: #e08484; border-color: rgba(224,132,132,.4); }
-/* In light mode a faint tint washes out, so use solid pills with white text */
-:root[data-theme="light"] .open-chip { background: var(--green); color: #fff; border-color: var(--green); }
-:root[data-theme="light"] .open-chip.closed { background: #b23b3b; color: #fff; border-color: #b23b3b; }
+.open-chip.closed { background: #b23b3b; color: #fff; border-color: rgba(255,255,255,.3); }
 @keyframes pulse { 50% { opacity: .35; } }
 
 .scroll-cue {
@@ -405,7 +404,7 @@ h3 { font-size: 1.15rem; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.5rem; }
 .site-footer p, .site-footer li { color: var(--ink-dim); font-size: .92rem; }
 .site-footer .brand { margin-bottom: .8rem; }
-.site-footer h4 { color: var(--ink); margin-bottom: .7rem; }
+.site-footer h3 { color: var(--ink); font-size: 1.05rem; margin-bottom: .7rem; }
 .site-footer li { margin-bottom: .45rem; }
 .site-footer a:not(.brand) { color: var(--ink-dim); }
 .site-footer a:not(.brand):hover { color: var(--gold-bright); }
