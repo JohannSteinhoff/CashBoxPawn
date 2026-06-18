@@ -2,6 +2,8 @@
 
 Website for Cash Box Pawn — 1515 Aquarena Springs Dr, Suite 100, San Marcos, TX 78666.
 
+**Live site:** https://johannsteinhoff.github.io/CashBoxPawn/
+
 A fast, mobile-friendly single-page site built with plain HTML, CSS, and JavaScript
 (no frameworks, no build step). It can be hosted for free on GitHub Pages, Netlify, or
 Cloudflare Pages.
